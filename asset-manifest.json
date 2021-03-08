@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/milktea-order-app/static/css/main.b7484c3c.chunk.css",
+    "main.js": "/milktea-order-app/static/js/main.6ed7d93a.chunk.js",
+    "main.js.map": "/milktea-order-app/static/js/main.6ed7d93a.chunk.js.map",
+    "runtime-main.js": "/milktea-order-app/static/js/runtime-main.1e3ead1b.js",
+    "runtime-main.js.map": "/milktea-order-app/static/js/runtime-main.1e3ead1b.js.map",
+    "static/js/2.d14210fc.chunk.js": "/milktea-order-app/static/js/2.d14210fc.chunk.js",
+    "static/js/2.d14210fc.chunk.js.map": "/milktea-order-app/static/js/2.d14210fc.chunk.js.map",
+    "static/js/3.b031e608.chunk.js": "/milktea-order-app/static/js/3.b031e608.chunk.js",
+    "static/js/3.b031e608.chunk.js.map": "/milktea-order-app/static/js/3.b031e608.chunk.js.map",
+    "index.html": "/milktea-order-app/index.html",
+    "static/css/main.b7484c3c.chunk.css.map": "/milktea-order-app/static/css/main.b7484c3c.chunk.css.map",
+    "static/js/2.d14210fc.chunk.js.LICENSE.txt": "/milktea-order-app/static/js/2.d14210fc.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1e3ead1b.js",
+    "static/js/2.d14210fc.chunk.js",
+    "static/css/main.b7484c3c.chunk.css",
+    "static/js/main.6ed7d93a.chunk.js"
+  ]
+}
