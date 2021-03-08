@@ -1,0 +1,50 @@
+.App {
+  background: rgb(1,211,255);
+background: linear-gradient(0deg, rgba(1,211,255,1) 41%, rgba(5,16,167,1) 100%);
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  text-align: center;
+  font-size: 4vw;
+}
+
+.App h1, h2, h3{
+  text-shadow: rgb(0, 0, 0) 1px 1px 3px;
+}
+
+button {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: rgb(180,180,180);
+  background: linear-gradient(0deg, rgba(180,180,180,1) 0%, rgba(235,235,235,1) 100%);
+  border: none;
+  border-radius: 5px;
+  box-shadow: rgb(54, 54, 54) 1px 1px 3px;
+  color: black;
+  padding: 2% 5%;
+  margin: 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2vh;
+}
+
+nav {
+  background: rgb(180,180,180);
+  background: linear-gradient(0deg, rgba(180,180,180,1) 0%, rgba(235,235,235,1) 100%);
+  box-shadow: rgb(54, 54, 54) 0px 1px 1px;
+  padding-right: 60%;
+}
+
+nav button {
+ background: rgb(255, 255, 255);
+ box-shadow: none;
+ border: solid 1px grey;
+}
+
+.bigButton {
+  font-size: 5vw;
+  width: 50%;
+}
+
+.orderconfirm {
+  padding: 0 1% 0 1%;
+}
