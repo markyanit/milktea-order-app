@@ -1,4 +1,5 @@
 import React from "react";
+import DrinkItem from "./components/DrinkItem";
 
 let drinkItems = [
   { name: "Original Milk Tea", price: 2.5 },
@@ -17,9 +18,6 @@ let drinkItems = [
   { name: "Caramel Milk Tea", price: 2.5 },
 ];
 
-var order = [];
-var totalPrice = 0;
-
 export default class OrderApp extends React.Component {
   constructor(props) {
     super(props);
@@ -27,26 +25,29 @@ export default class OrderApp extends React.Component {
     this.state = {
       activeScreen: "mainMenu",
       selectedItem: undefined,
+      order: [],
+      totalPrice: 0,
+      totalItems: 0,
+
     };
   }
 
   clearOrder = () => {
-    this.setState({ activeScreen: "mainMenu" });
-    order.length = 0;
-    totalPrice = 0;
+    this.setState({ activeScreen: "mainMenu", order: [], totalPrice: 0, totalItems: 0 });
   };
 
   deleteItem = (drink) => {
     this.setState({ selectedItem: drink });
 
-    order.forEach((i) => {
+    this.state.order.forEach((i) => {
       if (i === drink) {
-        if (i.includes("2.75")) {
-          totalPrice = totalPrice - 2.75;
+        if (i[5].includes("2.75")) {
+          this.setState({ totalPrice: this.state.totalPrice - 2.75 });
         } else {
-          totalPrice = totalPrice - 2.5;
+          this.setState({ totalPrice: this.state.totalPrice - 2.5 });
         }
-        order.splice(i, 1);
+        this.state.order.splice(i, 1);
+        this.setState({ totalItems: this.state.totalItems - 1 });
       }
     });
   };
@@ -76,7 +77,7 @@ export default class OrderApp extends React.Component {
       case "drinkItem":
         screen = (
           <div>
-            <DrinkItem {...this.state.selectedItem}></DrinkItem>
+            <DrinkItem {...this.state.selectedItem} ref={ref => (this.child = ref)} setState={order => this.setState(order)}></DrinkItem>
             <button onClick={() => this.setState({ activeScreen: "mainMenu" })}>
               Back
             </button>
@@ -91,11 +92,11 @@ export default class OrderApp extends React.Component {
             <h3>
               ---------------------------------------
             </h3>
-            {order.map((drink) => (
+            {this.state.order.map((drink) => (
               <button onClick={() => this.deleteItem(drink)}>{drink}</button>
             ))}
 
-            <h1>TOTAL: ${totalPrice.toFixed(2)}</h1>
+            <h1>TOTAL: ${this.state.totalPrice.toFixed(2)}</h1>
             <button
               onClick={() => this.setState({ activeScreen: "orderConfirm" })}
              class = "bigButton">
@@ -113,10 +114,10 @@ export default class OrderApp extends React.Component {
           <div class="orderconfirm">
             <h1>ORDER CONFIRMED</h1>
             <h3>Order #{Math.floor(Math.random() * 1001)}</h3>
-            {order.map((drink) => (
+            {this.state.order.map((drink) => (
               <p>{drink}</p>
             ))}
-            <h3>TOTAL: ${totalPrice.toFixed(2)}</h3>
+            <h3>TOTAL: ${this.state.totalPrice.toFixed(2)}</h3>
             <h3>
               ---------------------------------------
             </h3>
@@ -132,7 +133,7 @@ export default class OrderApp extends React.Component {
     }
 
     return (
-      <div class="App">
+      <div className="App">
         <nav>
           <button
             onClick={() => {
@@ -146,127 +147,12 @@ export default class OrderApp extends React.Component {
               this.setState({ activeScreen: "currentOrder" });
             }}
           >
-            BAG
+            BAG <b id="bag">({this.state.totalItems}) | ${this.state.totalPrice.toFixed(2)}</b>
           </button>
         </nav>
-
+        <br />
+        <br />
         {screen}
-      </div>
-    );
-  }
-}
-
-export class DrinkItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ice: undefined,
-      sweetness: undefined,
-      toppings: undefined,
-      active: true,
-    };
-  }
-
-  addItem() {
-    let addedItem = [];
-
-    totalPrice = totalPrice + this.props.price;
-
-    addedItem.push(
-      this.props.name,
-      this.state.ice,
-      this.state.sweetness,
-      this.state.toppings,
-      "$" + this.props.price.toFixed(2)
-    );
-
-    order.push(addedItem.join("/"));
-
-    this.resetItem();
-  }
-
-  resetItem() {
-    this.setState({
-      ice: undefined,
-      sweetness: undefined,
-      toppings: undefined,
-      active: false,
-    });
-  }
-
-  render() {
-    return (
-      <div className="drinkitem">
-        <h1>{this.props.name}</h1>
-        <h2>${this.props.price.toFixed(2)}</h2>
-
-        <h6>SPECIFICATIONS: </h6>
-        <p>{this.state.ice}</p>
-        <p>{this.state.sweetness}</p>
-        <p>{this.state.toppings}</p>
-
-        <h3>
-          ---------------------------------------
-            </h3>
-        
-        <h3>ICE:</h3>
-
-        <button onClick={() => this.setState({ ice: "Ice" })}>Ice</button>
-
-        <button onClick={() => this.setState({ ice: "No Ice" })}>No Ice</button>
-
-        <h3>SWEETNESS:</h3>
-
-        <button onClick={() => this.setState({ sweetness: "100% Sweetness" })}>
-          100%
-        </button>
-
-        <button onClick={() => this.setState({ sweetness: "75% Sweetness" })}>
-          75%
-        </button>
-
-        <button onClick={() => this.setState({ sweetness: "50% Sweetness" })}>
-          50%
-        </button>
-
-        <button onClick={() => this.setState({ sweetness: "25% Sweetness" })}>
-          25%
-        </button>
-
-        <h3>TOPPINGS:</h3>
-
-        <button onClick={() => this.setState({ toppings: "Boba" })}>
-          Boba
-        </button>
-
-        <button onClick={() => this.setState({ toppings: "Mini Boba" })}>
-          {" "}
-          Mini Boba
-        </button>
-
-        <button onClick={() => this.setState({ toppings: "Popping Boba" })}>
-          Popping Boba
-        </button>
-
-        <button onClick={() => this.setState({ toppings: "Lychee Jelly" })}>
-          {" "}
-          Lychee Jelly
-        </button>
-
-        <button onClick={() => this.setState({ toppings: "Coffee Jelly" })}>
-          Coffee Jelly
-        </button>
-
-        <button onClick={() => this.setState({ toppings: "Tropical Juice Popper" })}>
-        Tropical Juice Popper
-        </button>
-
-        <h3>
-              ---------------------------------------
-            </h3>
-
-        <button onClick={() => this.addItem()} class="bigButton">ADD TO BAG</button>
       </div>
     );
   }
