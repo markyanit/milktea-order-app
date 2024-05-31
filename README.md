@@ -15,4 +15,4 @@ Built using React and appropriate for mobile devices.
 
 You can find it here:
 
-https://yanitmark.github.io/milktea-order-app/index.html
+https://markyanit.github.io/milktea-order-app/index.html
